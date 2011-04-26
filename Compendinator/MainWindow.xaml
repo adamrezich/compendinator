@@ -1,0 +1,115 @@
+﻿<ribbon:RibbonWindow xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:ribbon="clr-namespace:Microsoft.Windows.Controls.Ribbon;assembly=RibbonControlsLibrary" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="Compendinator.MainWindow"
+		Title="Compendinator"
+		x:Name="RibbonWindow"
+		Width="640" Height="480" WindowStartupLocation="CenterScreen" WindowStyle="SingleBorderWindow" Closing="RibbonWindow_Closing" Loaded="RibbonWindow_Loaded">
+
+	<Grid x:Name="LayoutRoot">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="Auto"/>
+			<RowDefinition Height="*"/>
+			<RowDefinition Height="24"/>
+		</Grid.RowDefinitions>
+
+		<ribbon:Ribbon x:Name="Ribbon">
+			<ribbon:Ribbon.ApplicationMenu>
+				<ribbon:RibbonApplicationMenu SmallImageSource="Images\SmallIcon.png">
+					<ribbon:RibbonApplicationMenuItem Header="Hello _Ribbon"
+													  x:Name="MenuItem1"
+													  ImageSource="Images\LargeIcon.png"/>
+				</ribbon:RibbonApplicationMenu>
+			</ribbon:Ribbon.ApplicationMenu>
+			<ribbon:RibbonTab x:Name="tabHome" 
+							  Header="Home">
+				<ribbon:RibbonGroup Header="DDI Account" Margin="0">
+					<ribbon:RibbonTextBox x:Name="tbEmail" TextWrapping="Wrap" Text="E-mail" GotFocus="tbEmail_GotFocus" LostFocus="tbEmail_LostFocus" Command="ApplicationCommands.SelectAll" TextChanged="tbEmail_TextChanged" />
+					<ribbon:RibbonTextBox x:Name="tbPassword" TextWrapping="Wrap" Text="Password" LostFocus="tbPassword_LostFocus" GotFocus="tbPassword_GotFocus" Command="ApplicationCommands.SelectAll" TextChanged="tbPassword_TextChanged" />
+					<ribbon:RibbonCheckBox x:Name="cbRemember" Height="Auto" Label="Remember" Checked="cbRemember_Checked" Unchecked="cbRemember_Unchecked" />
+					<ribbon:RibbonButton x:Name="btnDDI_SignIn"
+						LargeImageSource="Images/LargeIcon.png"
+						Label="Sign In" Height="Auto" Margin="0,0,-0.001,0" d:LayoutOverrides="Width" Click="btnDDI_SignIn_Click" />
+				</ribbon:RibbonGroup>
+				<ribbon:RibbonGroup Header="Monsters">
+					<ribbon:RibbonButton x:Name="btnMonsters_RetrieveList"
+						LargeImageSource="Images\LargeIcon.png"
+						Label="Retrieve List" Click="btnMonsters_RetrieveList_Click" />
+					<ribbon:RibbonButton x:Name="btnMonsters_ImportAll"
+						LargeImageSource="Images/LargeIcon.png"
+						Label="Import All" Click="btnMonsters_ImportAll_Click" />                    
+				</ribbon:RibbonGroup>
+				<ribbon:RibbonGroup Header="Items" Margin="0">
+					<ribbon:RibbonButton x:Name="btnItems_RetrieveList"
+						LargeImageSource="Images\LargeIcon.png"
+						Label="Retrieve List" Click="btnItems_RetrieveList_Click" />
+					<ribbon:RibbonButton x:Name="btnItems_ImportAll"
+						LargeImageSource="Images/LargeIcon.png"
+						Label="Import All" Click="btnItems_ImportAll_Click" />   
+				</ribbon:RibbonGroup>
+				<ribbon:RibbonGroup Header="Traps" Margin="0">
+					<ribbon:RibbonButton x:Name="btnTraps_RetrieveList"
+						LargeImageSource="Images\LargeIcon.png"
+						Label="Retrieve List" Click="btnTraps_RetrieveList_Click" />
+					<ribbon:RibbonButton x:Name="btnTraps_ImportAll"
+						LargeImageSource="Images/LargeIcon.png"
+						Label="Import All" Click="btnTraps_ImportAll_Click" />   
+				</ribbon:RibbonGroup>
+				
+			</ribbon:RibbonTab>
+			<ribbon:RibbonTab x:Name="tabTwo" 
+							  Header="Two">
+			</ribbon:RibbonTab>
+		</ribbon:Ribbon>
+		<StatusBar Grid.Row="2">
+			<StatusBar.ItemsPanel>
+				<ItemsPanelTemplate>
+					<Grid>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="*"/>
+						</Grid.RowDefinitions>
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="4*"/>
+							<ColumnDefinition Width="Auto"/>
+							<ColumnDefinition Width="*"/>
+							<ColumnDefinition Width="Auto"/>
+						</Grid.ColumnDefinitions>
+					</Grid>
+				</ItemsPanelTemplate>
+			</StatusBar.ItemsPanel>
+			<StatusBarItem>
+				<TextBlock Name="statusBar">Ready</TextBlock>
+			</StatusBarItem>
+			<StatusBarItem Grid.Column="1">
+				<TextBlock></TextBlock>
+			</StatusBarItem>
+			<StatusBarItem Grid.Column="2">
+				<TextBlock></TextBlock>
+			</StatusBarItem>
+			<StatusBarItem Grid.Column="3">
+				<ProgressBar Value="0" Width="100" Height="18" Name="progressBar" />
+			</StatusBarItem>
+		</StatusBar>
+		<Grid Grid.Row="1">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="*"/>
+				<ColumnDefinition Width="Auto"/>
+				<ColumnDefinition Width="*"/>
+			</Grid.ColumnDefinitions>
+			<GridSplitter HorizontalAlignment="Right" VerticalAlignment="Stretch" Width="2" Grid.Column="1" ResizeBehavior="PreviousAndNext" Background="{DynamicResource SolidBorderBrush}" />
+            <Label Content="Console" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+            <TextBox x:Name="tbConsole" Margin="0,25.96,0,0" TextWrapping="Wrap" VerticalScrollBarVisibility="Visible" IsReadOnly="True" />
+            <TabControl Grid.Column="2">
+            	<TabItem x:Name="tMonsters" Header="Monsters">
+            		<Grid Background="#FFE5E5E5">
+            			<DataGrid x:Name="dgMonsters" IsReadOnly="True">
+            			</DataGrid>
+            		</Grid>
+            	</TabItem>
+            	<TabItem x:Name="tItems" Header="Items">
+            		<Grid Background="#FFE5E5E5"/>
+            	</TabItem>
+                <TabItem x:Name="tTraps" Header="Traps">
+                    <Grid Background="#FFE5E5E5"/>
+                </TabItem>
+            </TabControl>
+		</Grid>
+	</Grid>
+</ribbon:RibbonWindow>
